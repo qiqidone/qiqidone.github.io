@@ -36,6 +36,29 @@
             与加密不同的散列算法：散列算法也称 Hash（哈希）算法，是一种将任意长度的消息压缩到某一固定长度（消息摘要）的函数，该过程是不可逆的，即不可能通过散列加密后的的结果逆向得出原始的信息。
         </p>
 
+        <p>Ruby提供的openssl模块可以满足主流的加密。以RC4为例：</p>
+        <pre><code style="background-color: rgba(3, 3, 3, 0.3)">
+            #加密
+            require 'openssl'
+            def rc4_encrypt(message)
+            rc4 = OpenSSL::Cipher::Cipher.new("RC4")
+            rc4.encrypt
+            rc4.key = RC_KEY
+            rc4.update(message)
+            e << rc4.final
+            # Make it purdy. Useful for database storage.
+            e.unpack("H*")[0]
+            end
+
+            #解密
+            def rc4_decrypt(message)
+            rc4 = OpenSSL::Cipher::Cipher.new("RC4")
+            rc4.decrypt
+            rc4.key = YIXIN_RC_KEY
+            rc4.padding = 0
+            rc4.update(message)
+            end
+        </code></pre>
 
         <h3>
             <a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span
