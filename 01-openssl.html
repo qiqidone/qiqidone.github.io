@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>Qiqidone.GitHub.io</title>
+    <title>Qiqidone@GitHub</title>
 </head>
 
 <body>
@@ -18,6 +18,7 @@
         <a id="forkme_banner" href="https://github.com/qiqidone">View on GitHub</a>
 
         <h1 id="project_title">Qiqidone</h1>
+
         <h2 id="project_tagline">He that breaks a thing to find out what it is has left the path of wisdom. </h2>
 
     </header>
@@ -39,13 +40,16 @@
                     aria-hidden="true" class="octicon octicon-link"></span></a>一、Openssl</h3>
 
         <p>Openssl提供了市面上主流的加解密算法实现。</p>
+
         <p>对称加密：对称密钥密码对加密和解密使用同一个密钥。
             包括AES、Blowfish、Camellia、SEED、CAST-128、DES、IDEA、RC2、RC4、RC5、Triple DES、GOST 28147-89。
         </p>
+
         <p>
             非对称性加密:非对称性加密有不同的密钥,私钥（private key）和公钥（public key）。
             包括：RSA、DSA、Diffie–Hellman key exchange、 Elliptic curve、GOST R 34.10-2001。
         </p>
+
         <p>
             散列算法：散列算法也称 Hash（哈希）算法，是一种将任意长度的消息压缩到某一固定长度（消息摘要）的函数，该过程是不可逆的，即不可能通过散列加密后的的结果逆向得出原始的信息。
             包括：MD5、MD2、SHA-1、SHA-2、RIPEMD-160、MDC-2、GOST R 34.11-94。
@@ -82,12 +86,13 @@
             Base64: 一种基于64个可打印字符来表示二进制数据的表示方法,
             使用的字符包括大小写字母各26个，加上10个数字，和加号“+”，斜杠“/”，一共64个字符，等号“=”用来作为后缀用途。
         </p>
+
         <p>网络传输一般都要求以Base64的格式传输数据，所以一般加密之后都要先转成Base64.解密的时候则先decode回来。
             Base64代码：
         </p>
         <pre><code style="background-color: rgba(3, 3, 3, 0.3)">
             def strict_encode(bin)
-                [bin].pack("m0")
+            [bin].pack("m0")
             end
         </code></pre>
 
@@ -104,6 +109,7 @@
         <h3>
             <a id="index" class="anchor" href="#index" aria-hidden="true"><span
                     aria-hidden="true" class="octicon octicon-link"></span></a>Index</h3>
+
         <p><a href="https://qiqidone.github.io" class="user-mention">首页</a></p>
     </section>
 </div>

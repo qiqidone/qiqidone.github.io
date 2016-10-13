@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Qiqidone.GitHub.io : blog">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Qiqidone@GitHub</title>
+</head>
+
+<body>
+<!-- HEADER -->
+<div id="header_wrap" class="outer">
+    <header class="inner">
+        <a id="forkme_banner" href="https://github.com/qiqidone">View on GitHub</a>
+
+        <h1 id="project_title">Qiqidone</h1>
+
+        <h2 id="project_tagline">He that breaks a thing to find out what it is has left the path of wisdom. </h2>
+
+    </header>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="main_content_wrap" class="outer">
+    <section id="main_content" class="inner">
+        <h1>
+            <a id="title" class="title" aria-hidden="true"><span
+                    aria-hidden="true" class="octicon octicon-link"></span></a>Unicode/UTF-8 编码以及其他</h1>
+
+        <!--Post content start -->
+        <!---->
+        <!---->
+
+        <h3>
+            <a class="part" href="" aria-hidden="true"><span
+                    aria-hidden="true" class="octicon octicon-link"></span></a>一、计算机编码</h3>
+
+        <p>
+            计算机处理的数据是二进制的0和1（高低电平两种状态），然后通过组合达到表示特定字符的作用，这个组合的过程就是编码。反之将组合解释成字符的过程就是解码。
+            计算机在美国诞生，所以一开始只用8位（1个字节byte）组合，总计256种，并制定了标准：American Standard Code for Information
+            Interchange(美国标准信息交换代码，简写为ASCII)。
+            在实际的使用过程中，第一个bit始终是0，剩下的7位足够英文字符使用。
+        </p>
+
+        <p>
+            随着计算机技术的发展，英文国家以外的比如西班牙、希腊等国家需要一些特别的字符，比如：西班牙语（Español）中的ñ。于是就把第一位bit利用了起来，制定了ISO标准。
+            该标准兼容ASCII。
+        <li>
+            0-127不动
+        </li>
+        <li>
+            128-255用以编码新字符
+        </li>
+        </p>
+
+        <p>
+            等到了中国以及其他亚洲国家，8位就不够用了，于是就有了2个byte表示1个汉字的编码标准，成为GB2312。（后来变成1xxxxxxx，xxxxxxxx的GBK标准，可以兼容GB2312）
+        <li>
+            0-256不动,0xxxxxxx
+        </li>
+        <li>
+            2byte汉字1xxxxxxx,1xxxxxxx
+        </li>
+        这里可以注意到，所有的编码都试图兼容ASCII，但都不考虑互相兼容。这些编码标准统称为ASCI，又称MBCS（Muilti-Bytes Charecter Set，多字节字符集。
+        互联网的发展，推进了编码标准的统一。考虑到所有字符集都不兼容，所以推出了Unicode编码，即万国码。
+        </p>
+
+        <h3>
+            <a class="part" href="" aria-hidden="true"><span
+                    aria-hidden="true" class="octicon octicon-link"></span></a>二、Unicode/UTF-8</h3>
+
+        <p>
+            Unicode范围包括U+0000至U+007F，即4byte。
+        <li>128个US-ASCII字符只需一个字节编码（Unicode范围由U+0000至U+007F）。</li>
+        <li>带有附加符号的拉丁文、希腊文等则需要两个字节编码（Unicode范围由U+0080至U+07FF）。</li>
+        <li>其他基本多文种平面（BMP）中的字符（大部分的汉字）使用三个字节编码（Unicode范围由U+0800至U+FFFF）。</li>
+        <li> 其他极少使用的Unicode,辅助平面的字符使用四至六字节编码。
+        </li>
+
+        UTF-8是Unicode标准的一种实现，现在是互联网最流行的编码标准。
+        </p>
+
+        <h3>
+            <a class="part" href="" aria-hidden="true"><span
+                    aria-hidden="true" class="octicon octicon-link"></span></a>三、Big v.s. Little Endian</h3>
+
+        <p>
+            大头(Big Endian)和小头(Little Endian)是CPU处理多字节数的不同方式。例如“汉”字的Unicode编码是6C49。
+            那么写到文件里时，究竟是将6C写在前面，还是将49写在前面？如果将6C写在前面，就是big endian。还是将49写在前面，就是little endian。
+        </p>
+
+        <h3>
+            <a class="part" href="" aria-hidden="true"><span
+                    aria-hidden="true" class="octicon octicon-link"></span></a>四、其他</h3>
+
+        <p>
+            在Stackvoerflow上看到有人问Base64和UTF-8/Unicode的差别，
+            这个答案其实很简单，Base64是对二进制的编码，是数据流的表达方式（二进制显示成字符串的编码），在互联网加解密传输基本都是Base64格式。
+            原因是对二进制的解码有很多标准，不同的编程语言都有自己的默认方式，但如果转成ASCII范围内的Base64编码，那么大家都统一了。
+            而Unicode是字符集编码标准。
+            这两个是不同的概念。
+        </p>
+        <!---->
+        <!---->
+        <!--Post content end -->
+        <h3>
+            <a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span
+                    aria-hidden="true" class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+
+        <p>Qiqidone (<a
+                href="https://github.com/qiqidone" class="user-mention">@qiqidone</a>) can be founded GitHub.</p>
+
+        <h3>
+            <a id="index" class="anchor" href="#index" aria-hidden="true"><span
+                    aria-hidden="true" class="octicon octicon-link"></span></a>Index</h3>
+
+        <p><a href="https://qiqidone.github.io" class="user-mention">首页</a></p>
+    </section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+    <footer class="inner">
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+    </footer>
+</div>
+
+
+</body>
+</html>
