@@ -67,22 +67,22 @@
             #加密
             require 'openssl'
             def rc4_encrypt(message)
-            rc4 = OpenSSL::Cipher::Cipher.new("RC4")
-            rc4.encrypt
-            rc4.key = RC_KEY
-            rc4.update(message)
-            e << rc4.final
-            # Make it purdy. Useful for database storage.
-            e.unpack("H*")[0]
+                rc4 = OpenSSL::Cipher::Cipher.new("RC4")
+                rc4.encrypt
+                rc4.key = RC_KEY
+                rc4.update(message)
+                e << rc4.final
+                # Make it purdy. Useful for database storage.
+                e.unpack("H*")[0]
             end
 
             #解密
             def rc4_decrypt(message)
-            rc4 = OpenSSL::Cipher::Cipher.new("RC4")
-            rc4.decrypt
-            rc4.key = YIXIN_RC_KEY
-            rc4.padding = 0
-            rc4.update(message)
+                rc4 = OpenSSL::Cipher::Cipher.new("RC4")
+                rc4.decrypt
+                rc4.key = YIXIN_RC_KEY
+                rc4.padding = 0
+                rc4.update(message)
             end
         </code></pre>
 
