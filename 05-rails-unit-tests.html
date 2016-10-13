@@ -29,7 +29,7 @@
     <section id="main_content" class="inner">
         <h1>
             <a id="title" class="title" aria-hidden="true"><span
-                    aria-hidden="true" class="octicon octicon-link"></span></a>JVM内存管理（一）：JVM内存模型</h1>
+                    aria-hidden="true" class="octicon octicon-link"></span></a>Rails的Unit Test</h1>
 
         <!--Post content start -->
         <!---->
@@ -37,30 +37,48 @@
 
         <h3>
             <a class="anchor" aria-hidden="true"><span
-                    aria-hidden="true" class="octicon octicon-link"></span></a>一、JVM内存模型</h3>
+                    aria-hidden="true" class="octicon octicon-link"></span></a>一、缘起Rails</h3>
+
+        <p>想起6年前第一次认识37signals，时间飞快，绕了一圈，最后Rails又回来了。</p>
+        <p>
+            使用Rails搭建的某互联网金融项目后台至今运行了快半年了，踩了很多坑，一直没有完整地梳理单元测试。
+            一则是因为业务还不算复杂，参与的人员也不多，加上xuan的逻辑很严谨，基本上不会有什么问题。
+            所以没有UT也没有什么，但原则上说，写好单元测试真的会让人放心很多，所以我写的部分基本上都会写点ut方便自测。
+            另外，项目基本上也没有自动化测试，所以只要让单元测试承担更多的责任了。
+        </p>
+
+        <h3>
+            <a class="anchor" aria-hidden="true"><span
+                    aria-hidden="true" class="octicon octicon-link"></span></a>二、Rails的Unit Test</h3>
 
         <p>
-            JVM作为虚拟机通过和系统接口交互运行java代码，本身意味着额外的内存开销，但也拥有了自我管理模型的可能，
-            于是在效率被C/C++诟病的同时，java在自动内存管理方面做到了‘隐藏细节’、‘面向用户’的优势。
-            Java程序员不需要进行复杂的内存管理而专注在业务逻辑上。
-            JVM的内存模型包括：
+            Rails作为框架，最大的特点就是全面。基本上这是一个非常好的脚手架，帮程序员做了很多事情。
+            这对于新手而言好处是快速上手搭建项目，坏处是对框架的组织不够理解，踩了坑基本要靠社区和Google。
+            当然，可能比较适合需要小步快跑的项目，边干边学，以赛代练。下面是UT的基本配置：
         </p>
         <ul>
-            <li>程序计数器</li>
-                <p class="smaller">记录正在执行的虚拟机字节码的地址</p>
-            <li>虚拟机栈</li>
-            <p class="smaller">方法执行的内存区，每个方法执行时会在虚拟机栈中创建栈帧</p>
-            <li>本地方法栈</li>
-            <p class="smaller">虚拟机的Native方法执行的内存区</p>
-            <li>Java堆</li>
-            <p class="smaller">对象分配内存的区域</p>
-            <li>方法区</li>
-            <p class="smaller">存放类信息、常量、静态变量、编译器编译后的代码等数据</p>
+            <li>1.Test DB</li>
+            <p class="smaller">
+                需要一个测试db，在config/database.yml配置。
+            </p>
+            <li>2.Fixtures/YAML</li>
+            <p class="smaller">
+                对于每个Model都对应一个yml，可以写上mock的数据。
+                值得注意的是该文件的文件名（包括目录，rails会用‘_’拼接，这一点不管是erb到method的映射还是其他都一样，rails的约定）就是table的名称。
+            </p>
+            <li>3.Rake Prepare</li>
+            <p class="smaller">
+                测试之前不要忘记update下数据库的结构，如果修改了table的column或者其他，注意和yml文件对应，然后要运行
+                rake db:test:load和rake db:test:prepare.
+                BTW，使用IDE如Rubymine可以让生活更轻松。
+            </p>
         </ul>
 
-        <img src="images/jvm_memory_1.png" class="inner" title="jvm-memory-model">
-
-
+        <p>
+            <a href="http://doc.bccnsoft.com/docs/rails-guides-4.1-cn/testing.html">Rails Test教程</a>我看了几遍感觉很乏力，只好按照自己java的路子来写。
+            然后Functional Test和Integration Test基本上就是postman和ut以及手工测试来解决，等慢慢再熟悉一点rails再考虑更多的自动化测试吧。
+        </p>
+        <img src="images/rails-test1.png" class="inner">
         <!---->
         <!---->
         <!--Post content end -->
