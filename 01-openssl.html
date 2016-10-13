@@ -18,7 +18,7 @@
         <a id="forkme_banner" href="https://github.com/qiqidone">View on GitHub</a>
 
         <h1 id="project_title">Qiqidone</h1>
-        <h2 id="project_tagline">He that breaks a thing to find out what it is has left the path of wisdom.  </h2>
+        <h2 id="project_tagline">He that breaks a thing to find out what it is has left the path of wisdom. </h2>
 
     </header>
 </div>
@@ -26,9 +26,17 @@
 <!-- MAIN CONTENT -->
 <div id="main_content_wrap" class="outer">
     <section id="main_content" class="inner">
+        <h1>
+            <a id="title" class="title" aria-hidden="true"><span
+                    aria-hidden="true" class="octicon octicon-link"></span></a>Openssl与加解密</h1>
+
+        <!--Post content start -->
+        <!---->
+        <!---->
+
         <h3>
-            <a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span
-                    aria-hidden="true" class="octicon octicon-link"></span></a>Openssl</h3>
+            <a class="anchor" href="" aria-hidden="true"><span
+                    aria-hidden="true" class="octicon octicon-link"></span></a>一、Openssl</h3>
 
         <p>Openssl提供了市面上主流的加解密算法实现。</p>
         <p>对称加密：对称密钥密码对加密和解密使用同一个密钥。
@@ -67,6 +75,25 @@
             end
         </code></pre>
 
+        <h3><a class="anchor" href="" aria-hidden="true"><span
+                aria-hidden="true" class="octicon octicon-link"></span></a>二、Base64</h3>
+
+        <p>
+            Base64: 一种基于64个可打印字符来表示二进制数据的表示方法,
+            使用的字符包括大小写字母各26个，加上10个数字，和加号“+”，斜杠“/”，一共64个字符，等号“=”用来作为后缀用途。
+        </p>
+        <p>网络传输一般都要求以Base64的格式传输数据，所以一般加密之后都要先转成Base64.解密的时候则先decode回来。
+            Base64代码：
+        </p>
+        <pre><code style="background-color: rgba(3, 3, 3, 0.3)">
+            def strict_encode(bin)
+                [bin].pack("m0")
+            end
+        </code></pre>
+
+        <!---->
+        <!---->
+        <!--Post content end -->
         <h3>
             <a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span
                     aria-hidden="true" class="octicon octicon-link"></span></a>Authors and Contributors</h3>
