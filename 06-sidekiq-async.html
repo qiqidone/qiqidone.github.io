@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Qiqidone.GitHub.io : blog">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" href="stylesheets/hightlight.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <title>Qiqidone@GitHub</title>
+</head>
+
+<body>
+<!-- HEADER -->
+<div id="header_wrap" class="outer">
+    <header class="inner">
+        <a id="forkme_banner" href="https://github.com/qiqidone">View on GitHub</a>
+
+        <h1 id="project_title">Qiqidone</h1>
+
+        <h2 id="project_tagline">He that breaks a thing to find out what it is has left the path of wisdom. </h2>
+
+    </header>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="main_content_wrap" class="outer">
+    <section id="main_content" class="inner">
+        <h1>
+            <a id="title" class="title" aria-hidden="true"><span
+                    aria-hidden="true" class="octicon octicon-link"></span></a>Sidekiq：异步队列</h1>
+
+        <!--Post content start -->
+        <!---->
+        <!---->
+
+        <h3>
+            <a class="anchor" aria-hidden="true"><span
+                    aria-hidden="true" class="octicon octicon-link"></span></a>一、异步与任务</h3>
+
+        <p>
+            对于耗时较长的事务必然要使用异步，否则会严重影响用户体验；还有那些不能马上被消费掉的任务，如果不使用队列进行管理的话，很容易造成堵塞，然后导致网络瘫痪。
+            比如发送邮件这一类事务，非常合适使用异步队列管理。
+        </p>
+        <p>
+            队列还可以用来做消息队列，不过那一类虽然也是异步，但对实时性相对较高。Message Queue比较有名的比如RabbitMQ，ActiveMQ等。
+            功能都比较丰富。下回再讲MQ。
+        </p>
+        <h3>
+            <a class="anchor" aria-hidden="true"><span
+                    aria-hidden="true" class="octicon octicon-link"></span></a>二、Sidekiq介绍</h3>
+
+        <p>
+            Sidekiq比较成熟，速度较快，对于Ruby来说是一个很好的选择。之前的Resque和DelayedJob都不如Sidekiq有效率。
+        </p>
+
+        <p>
+            Sidekiq还提供了web ui用来监控。
+        </p>
+        <img src="images/sidekiq-web-ui.png" class="inner" title="jvm-memory-model">
+
+        <h3>
+            <a class="anchor" aria-hidden="true"><span
+                    aria-hidden="true" class="octicon octicon-link"></span></a>二、Sidekiq快速入门</h3>
+
+        <p>
+            首先，在 Gemfile 中添加对应包 gem 'sidekiq'。
+            接着，在 app/workers 文件夹中添加一个 worker，来处理异步请求：
+        </p>
+        <pre><code class="ruby">
+            class HardWorker
+                include Sidekiq::Worker
+                def perform(name, count)
+                    # do something
+                end
+            end
+            # 调用
+            HardWorker.perform_async('bob', 5)
+            # 延时调用
+            HardWorker.perform_in(5.minutes, 'bob', 5)
+            #使用自带delay调用
+            User.delay.do_some_stuff(current_user.id, 20)
+        </code></pre>
+        <p>
+            启动Sidekiq：
+        </p>
+        <pre><code class="shell">
+            bundle exec sidekiq
+        </code></pre>
+
+        <h3>
+            <a class="anchor" aria-hidden="true"><span
+                    aria-hidden="true" class="octicon octicon-link"></span></a>三、Redis</h3>
+
+        <p>
+            Sidekiq把队列存到Redis。所以还要开一个Redis配合。Redis比较简单，配置好启动服务就可以了。
+        </p>
+
+        <!---->
+        <!---->
+        <!--Post content end -->
+        <h3>
+            <a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span
+                    aria-hidden="true" class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+
+        <p>Qiqidone (<a
+                href="https://github.com/qiqidone" class="user-mention">@qiqidone</a>) can be founded GitHub.</p>
+
+        <h3>
+            <a id="index" class="anchor" href="#index" aria-hidden="true"><span
+                    aria-hidden="true" class="octicon octicon-link"></span></a>Index</h3>
+
+        <p><a href="https://qiqidone.github.io" class="user-mention">首页</a></p>
+    </section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+    <footer class="inner">
+        <a href="https://github.com" aria-label="Homepage" class="site-footer-mark" title="GitHub"
+           style="float: right;">
+            <svg aria-hidden="true" class="octicon octicon-mark-github" height="24" version="1.1" viewBox="0 0 16 16"
+                 width="24">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+            </svg>
+        </a>
+
+        <p>© 2016 Designed by <a href="https://qiqidone.github.io">Qiqidone</a></p>
+    </footer>
+</div>
+
+
+</body>
+</html>
