@@ -7,7 +7,11 @@
     <meta name="description" content="Qiqidone.GitHub.io : blog">
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
+    <!--<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="stylesheets/hightlight.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
     <title>Qiqidone@GitHub</title>
 </head>
 
@@ -39,24 +43,28 @@
             <a class="anchor" href="" aria-hidden="true"><span
                     aria-hidden="true" class="octicon octicon-link"></span></a>一、Openssl</h3>
 
-        <p>Openssl提供了市面上主流的加解密算法实现。</p>
+        <p>Openssl提供了市面上主流的加解密算法实现。这里先介绍下加密和Hash（散列）：</p>
 
-        <p>对称加密：对称密钥密码对加密和解密使用同一个密钥。
-            包括AES、Blowfish、Camellia、SEED、CAST-128、DES、IDEA、RC2、RC4、RC5、Triple DES、GOST 28147-89。
-        </p>
+        <ul>
+            <li>对称加密</li>
+            <p class="smaller">对称加密：对称密钥密码对加密和解密使用同一个密钥。
+                包括AES、Blowfish、Camellia、SEED、CAST-128、DES、IDEA、RC2、RC4、RC5、Triple DES、GOST 28147-89。
+            </p>
+            <li>非对称加密</li>
+            <p class="smaller">
+                非对称性加密:非对称性加密有不同的密钥,私钥（private key）和公钥（public key）。
+                包括：RSA、DSA、Diffie–Hellman key exchange、 Elliptic curve、GOST R 34.10-2001。
+            </p>
+            <li>散列</li>
+            <p class="smaller">
+                散列算法：散列算法也称 Hash（哈希）算法，是一种将任意长度的消息压缩到某一固定长度（消息摘要）的函数，该过程是不可逆的，即不可能通过散列加密后的的结果逆向得出原始的信息。
+                包括：MD5、MD2、SHA-1、SHA-2、RIPEMD-160、MDC-2、GOST R 34.11-94。
+            </p>
+        </ul>
 
-        <p>
-            非对称性加密:非对称性加密有不同的密钥,私钥（private key）和公钥（public key）。
-            包括：RSA、DSA、Diffie–Hellman key exchange、 Elliptic curve、GOST R 34.10-2001。
-        </p>
-
-        <p>
-            散列算法：散列算法也称 Hash（哈希）算法，是一种将任意长度的消息压缩到某一固定长度（消息摘要）的函数，该过程是不可逆的，即不可能通过散列加密后的的结果逆向得出原始的信息。
-            包括：MD5、MD2、SHA-1、SHA-2、RIPEMD-160、MDC-2、GOST R 34.11-94。
-        </p>
 
         <p>Ruby提供的openssl模块可以满足主流的加密。以RC4为例：</p>
-        <pre><code style="background-color: rgba(3, 3, 3, 0.3)">
+        <pre><code class="ruby">
             #加密
             require 'openssl'
             def rc4_encrypt(message)
@@ -90,7 +98,7 @@
         <p>网络传输一般都要求以Base64的格式传输数据，所以一般加密之后都要先转成Base64.解密的时候则先decode回来。
             Base64代码：
         </p>
-        <pre><code style="background-color: rgba(3, 3, 3, 0.3)">
+        <pre><code class="ruby">
             def strict_encode(bin)
             [bin].pack("m0")
             end
