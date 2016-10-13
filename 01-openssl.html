@@ -94,7 +94,7 @@
             使用的字符包括大小写字母各26个，加上10个数字，和加号“+”，斜杠“/”，一共64个字符，等号“=”用来作为后缀用途。
         </p>
 
-        <p>网络传输一般都要求以Base64的格式传输数据，所以一般加密之后都要先转成Base64.解密的时候则先decode回来。
+        <p>网络传输中加解密一般都要求以Base64的格式传输数据，所以一般加密之后都要先转成Base64.解密的时候则先decode回来。
             Base64代码：
         </p>
         <pre><code class="ruby">
@@ -103,6 +103,15 @@
             end
         </code></pre>
 
+        <p>另外值得一提的是，网络传输比如url里面的参数一般都会做utf-8编码，有时候返回的数据也会是utf-8编码，而这些编码就会变成十六进制，但本地语言又不直接接受，则需要重新转回本地语言的编码方式，
+            所以在网络传输是要进行预编码escape，将某些字符被替换成了十六进制的转义序列（除去ASCII字母和数字以及公用的字符），这样所有的计算机语言都能接受。
+            反之，需要反编码传回的数据，所以有了CGI.unescape(data, CGI::Encoding：：UTF_8))这样的函数做utf8 to native encoding。
+        </p>
+        <pre><code class="ruby">
+            def utf8_to_native(data)
+                CGI.unescape(data, CGI::Encoding：：UTF_8))
+            end
+        </code></pre>
         <!---->
         <!---->
         <!--Post content end -->
