@@ -201,14 +201,16 @@ ul, ol, dl {
 }
 
 ul {
-  list-style-position: inside;
-  list-style: disc;
+  list-style: disc inside;
   padding-left: 20px;
 }
 
+ul>p.smaller {
+  font-size: smaller;
+}
+
 ol {
-  list-style-position: inside;
-  list-style: decimal;
+  list-style: decimal inside;
   padding-left: 20px;
 }
 
