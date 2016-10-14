@@ -25,11 +25,10 @@
             });
 
             // 马上执行
+            var images = Array.apply(null, {length: 9}).map(Number.call, Number).map(function(x,i){return 'series'+(i+1)+'.jpg'});
             setInterval(function random_avatar(){
-                var imgs = ['qiqidone1.jpg', 'qiqidone2.jpg', 'qiqidone3.png',
-                            'qiqidone4.png', 'qiqidone5.png','qiqidone6.png'];
-                var random = Math.floor(Math.random() * imgs.length);
-                $('.qiqidone-img').attr('src','images/'+imgs[random]);
+                var random = Math.floor(Math.random() * images.length);
+                $('.qiqidone-img').attr('src','images/'+images[random]);
             }, 10000);
         });
     </script>
@@ -53,7 +52,7 @@
 <div id="main_content_wrap" class="outer">
     <section id="main_content" class="inner">
         <img width="155" height="155"
-             src="images/qiqidone2.jpg"
+             src="images/series1.jpg"
              class="qiqidone-img" alt="user"
              data-pin-nopin="true" style="
               border: 1px solid #f2f2f2;
