@@ -26,10 +26,14 @@
 
             // 马上执行
             var images = Array.apply(null, {length: 9}).map(Number.call, Number).map(function(x,i){return 'series'+(i+1)+'.jpg'});
+            $('.qiqidone-img').click(function(){
+                var random = Math.floor(Math.random() * images.length);
+                $(this).attr('src','images/'+images[random]);
+            });
             setInterval(function random_avatar(){
                 var random = Math.floor(Math.random() * images.length);
                 $('.qiqidone-img').attr('src','images/'+images[random]);
-            }, 10000);
+            }, 5000);
         });
     </script>
 </head>
