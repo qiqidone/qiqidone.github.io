@@ -16,7 +16,9 @@
         $(document).ready(function () {
             // 马上执行
             (function random_avartar(){
-                var imgs = ['qiqidone.jpg', 'qiqidone1.jpg', 'qiqidone2.jpg'];
+                var imgs =
+                        ['qiqidone.jpg', 'qiqidone1.jpg', 'qiqidone2.jpg',
+                            'qiqidone3.png', 'qiqidone4.png', 'qiqidone5.png','qiqidone6.png'];
                 var random = Math.floor(Math.random() * imgs.length);
                 $('.qiqidone-img').attr('src','images/'+imgs[random]);
             })();
