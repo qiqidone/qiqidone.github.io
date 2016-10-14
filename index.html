@@ -25,13 +25,13 @@
             });
 
             // 马上执行
-            (function random_avatar(){
+            setInterval(function random_avatar(){
                 var imgs =
                         ['qiqidone.jpg', 'qiqidone1.jpg', 'qiqidone2.jpg',
                             'qiqidone3.png', 'qiqidone4.png', 'qiqidone5.png','qiqidone6.png'];
                 var random = Math.floor(Math.random() * imgs.length);
                 $('.qiqidone-img').attr('src','images/'+imgs[random]);
-            })();
+            }, 10000);
         });
     </script>
 </head>
