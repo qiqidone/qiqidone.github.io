@@ -24,7 +24,7 @@
                 }
             });
 
-            // 马上执行
+            // interval
             var images = Array.apply(null, {length: 9}).map(Number.call, Number).map(function(x,i){return 'series'+(i+1)+'.jpg'});
             $('.qiqidone-img').click(function(){
                 var random = Math.floor(Math.random() * images.length);
@@ -33,6 +33,8 @@
             setInterval(function random_avatar(){
                 var random = Math.floor(Math.random() * images.length);
                 $('.qiqidone-img').attr('src','images/'+images[random]);
+                $('.qiqidone-img').attr('width','155');
+                $('.qiqidone-img').attr('height','155');
             }, 5000);
         });
     </script>
@@ -93,7 +95,7 @@
                         <li class="post-menu">
                             <a aria-expanded="true">Javascript<span class="glyphicon arrow"></span></a>
                             <ul aria-expanded="false" class="collapse" style="display:none">
-                                <li><a>一、Nodejs初步</a></li>
+                                <li><a>一、NodeJS初步</a></li>
                             </ul>
                         </li>
 
