@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Qiqidone.GitHub.io : blog">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" href="stylesheets/hightlight.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <script src="javascripts/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <title>Qiqidone@GitHub</title>
+</head>
+
+<body>
+<!-- HEADER -->
+<div id="header_wrap" class="outer">
+    <header class="inner">
+        <a id="forkme_banner" href="https://github.com/qiqidone">View on GitHub</a>
+
+        <h1 id="project_title">Qiqidone</h1>
+
+        <h2 id="project_tagline">He that breaks a thing to find out what it is has left the path of wisdom. </h2>
+
+    </header>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="main_content_wrap" class="outer">
+    <section id="main_content" class="inner">
+        <h1>
+            <a id="title" class="title" aria-hidden="true"><span
+                    aria-hidden="true" class="octicon octicon-link"></span></a>Cache拯救世界</h1>
+
+        <!--Post content start -->
+        <!---->
+        <!---->
+
+        <h3>
+            <a class="anchor" aria-hidden="true"><span
+                    aria-hidden="true" class="octicon octicon-link"></span></a>一、加速用Cache</h3>
+
+        <p>
+            但凡有点规模的服务应用，都不得不面对这样的问题，就是随着数据的增加，数据库查询时间不断变长，最后导致响应时间的增加，成为系统的瓶颈。
+            Sql查询的优化很重要，不管是该有的索引，查询复杂度，还是数据库系统设计本身的分表、分库、分布式，都可以在这个问题上找到自己的价值。
+            但相比较高风险、高投入的数据库重设，Cache的引入无论从效果还是可行性上都不可能被忽视。
+        </p>
+        <p>
+            Cache的定位决定了它在提高单笔查询速率方面有着巨大的作用，但面对写频繁的业务需求来说，就变得比较无力。
+            但，不管怎样，加速不用Cache，一定匪夷所思。
+        </p>
+        <p>
+            当然，我们这里不是要讲前端的Cache，诸如浏览器Cache，或是CDN这种，也不是CPU的cache那种底层，我们只是讲Server层次的Cache。
+        </p>
+
+        <h3>
+            <a class="anchor" aria-hidden="true"><span
+                    aria-hidden="true" class="octicon octicon-link"></span></a>二、Cache的设计</h3>
+
+        <p>
+            Cache的设计第一原则是，IO越频繁越要有Cache。
+        </p>
+        <p>
+            web服务器系统中IO最频繁的无疑是数据库，所以对业务中频繁请求的数据表做cache很有必要。
+            一般来说，把数据读到内存中会比从数据库中查询快很多，所以诞生了像Memcached和Redis这样的内存型缓存系统。
+            这种Key-value式的数据存储系统对复杂业务需求不够能力，但做cache非常有效。当需要查询数据的时候先去Memcached上找可以比Mysql节省很多的时间。
+        </p>
+
+        <h3>
+            <a class="anchor" aria-hidden="true"><span
+                    aria-hidden="true" class="octicon octicon-link"></span></a>三、Memcached vs Redis</h3>
+
+        <p>
+
+        </p>
+
+        <!---->
+        <!---->
+        <!--Post content end -->
+        <h3>
+            <a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span
+                    aria-hidden="true" class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+
+        <p>Qiqidone (<a
+                href="https://github.com/qiqidone" class="user-mention">@qiqidone</a>) can be founded GitHub.</p>
+
+        <h3>
+            <a id="index" class="anchor" href="#index" aria-hidden="true"><span
+                    aria-hidden="true" class="octicon octicon-link"></span></a>Index</h3>
+
+        <p><a href="https://qiqidone.github.io" class="user-mention">首页</a></p>
+    </section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+    <footer class="inner">
+        <a href="https://github.com" aria-label="Homepage" class="site-footer-mark" title="GitHub"
+           style="float: right;">
+            <svg aria-hidden="true" class="octicon octicon-mark-github" height="24" version="1.1" viewBox="0 0 16 16"
+                 width="24">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+            </svg>
+        </a>
+
+        <p>© 2016 Designed by <a href="https://qiqidone.github.io">Qiqidone</a></p>
+    </footer>
+</div>
+
+
+</body>
+</html>
