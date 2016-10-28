@@ -48,12 +48,18 @@
             Sql查询的优化很重要，不管是该有的索引，查询复杂度，还是数据库系统设计本身的分表、分库、分布式，都可以在这个问题上找到自己的价值。
             但相比较高风险、高投入的数据库重设，Cache的引入无论从效果还是可行性上都不可能被忽视。
         </p>
+
         <p>
             Cache的定位决定了它在提高单笔查询速率方面有着巨大的作用，但面对写频繁的业务需求来说，就变得比较无力。
             但，不管怎样，加速不用Cache，一定匪夷所思。
         </p>
+
         <p>
             当然，我们这里不是要讲前端的Cache，诸如浏览器Cache，或是CDN这种，也不是CPU的cache那种底层，我们只是讲Server层次的Cache。
+        </p>
+        <p>
+            比如这样经典的设计：
+            <img src="images/09.jpg" class="inner" title="jvm-memory-model">
         </p>
 
         <h3>
@@ -63,6 +69,7 @@
         <p>
             Cache的设计第一原则是，IO越频繁越要有Cache。
         </p>
+
         <p>
             web服务器系统中IO最频繁的无疑是数据库，所以对业务中频繁请求的数据表做cache很有必要。
             一般来说，把数据读到内存中会比从数据库中查询快很多，所以诞生了像Memcached和Redis这样的内存型缓存系统。
@@ -75,7 +82,11 @@
 
         <p>
             在技术选型方面应该好好考虑的。感谢这个好时代，市场上有很多优秀的、开源的系统可以选择。
-            Redis的作者给出了自己的看法：
+            同样的IN-Memory数据系统中Memcached是比较早的系统，久经考验。redis出现比较晚，有很多前者的经验与反思，比如支持一定程度的持久化（Memcached不保存数据）。
+
+        </p>
+
+        <p> 两者的差别，Redis的作者给出了自己的看法：
         </p>
         <blockquote class="hljs-comment">
             <p>You should not care too much about performances. Redis is faster per core with small values, but
@@ -114,7 +125,23 @@
         </blockquote>
 
         <p>
-            我个人会很喜欢Redis，因为速度也没有差很多，如果真的遇到Redis无法承受的压力，再在那些局部的数据反问上用Memcached就好了——不过很难想象会有这样的场景发生，因为瓶颈一定发生在别的地方;-)
+            理论上说，完全的内存IO的Memcached会强于Redis，但实际上，Memcached使用的Libevent的牺牲了很多的性能，而redis自己实现了简易好用的网络传输协议，而这个造成了网络IO拖了memcached的后腿。
+            另外一个Memcached的优势是业界有很多集群化的方案，相对比较成熟，而Redis 3.0才刚刚推出了集群，做shard的方案还是要小心谨慎，自己设计好一致性哈希方案，实现横向拓展以及预防一些机器下线的问题。
+            我个人会很喜欢Redis，主要是因为Redis可以做持久化，不仅可以用来做cache，而且可以做MQ容器，可以一定程度代替数据库。另外速度也没有差很多。
+            如果真的遇到Redis无法承受的业务，再在那些局部的数据访问上用Memcached就好了——不过很难想象会有这样的场景发生，因为瓶颈一定发生在别的地方;-)
+        </p>
+        <p>
+            另外，Redis在遇到复杂的数据结构查询时，尽量考虑使用lua脚本，直接返回结果，很多client端的redis库在面对复杂数据结构或者业务逻辑时会拖慢很多速度。
+        </p>
+
+        <h3>
+            <a class="anchor" aria-hidden="true"><span
+                    aria-hidden="true" class="octicon octicon-link"></span></a>四、Cache不是万能药</h3>
+
+        <p>
+            基本上现在遇到性能问题，或者是用户体验不好，都会先想到哪里可以上cache，减少IO延时，减少系统负载。
+            Cache的引入的确在很多时候可以优化性能，提高体验，但如果cache上完了又出现新的性能瓶颈怎么办呢？那就上更多的机器吧。
+            所以可能最后系统架构上考虑好横向拓展很重要，不然每走一步都是新的问题。
         </p>
         <!---->
         <!---->
