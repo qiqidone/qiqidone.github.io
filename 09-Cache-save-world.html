@@ -5,8 +5,8 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="description" content="Qiqidone.GitHub.io : blog">
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
     <link rel="stylesheet" href="stylesheets/hightlight.css">
     <link rel="stylesheet" href="stylesheets/github-light.css">
@@ -74,9 +74,48 @@
                     aria-hidden="true" class="octicon octicon-link"></span></a>三、Memcached vs Redis</h3>
 
         <p>
-
+            在技术选型方面应该好好考虑的。感谢这个好时代，市场上有很多优秀的、开源的系统可以选择。
+            Redis的作者给出了自己的看法：
         </p>
+        <blockquote class="hljs-comment">
+            <p>You should not care too much about performances. Redis is faster per core with small values, but
+                memcached is able to use multiple cores with a single executable and TCP port without help from the
+                client. Also memcached is faster with big values in the order of 100k. Redis recently improved a lot
+                about big values (unstable branch) but still memcached is faster in this use case. The point here is:
+                nor one or the other will likely going to be your bottleneck for the query-per-second they can
+                deliver.</p>
 
+            <p> You should care about memory usage. For simple key-value pairs memcached is more memory efficient. If
+                you use Redis hashes, Redis is more memory efficient. Depends on the use case.</p>
+
+            <p> You should care about persistence and replication, two features only available in Redis. Even if your
+                goal is to build a cache it helps that after an upgrade or a reboot your data are still there.</p>
+
+            <p> You should care about the kind of operations you need. In Redis there are a lot of complex operations,
+                even just considering the caching use case, you often can do a lot more in a single operation, without
+                requiring data to be processed client side (a lot of I/O is sometimes needed). This operations are often
+                as fast as plain GET and SET. So if you don’t need just GEt/SET but more complex things Redis can help a
+                lot (think at timeline caching).</p>
+        </blockquote>
+        <p>翻译：</p>
+        <blockquote class="hljs-comment smaller">
+            <p>
+                没有必要过多的关注性能。由于Redis只使用单核，而Memcached可以使用多核，所以在比较上，平均每一个核上Redis在存储小数据时比Memcached性能更高。
+                而在100k以上的数据中，Memcached性能要高于Redis，虽然Redis最近也在存储大数据的性能上进行优化，但是比起Memcached，还是稍有逊色。
+                说了这么多，结论是，无论你使用哪一个，每秒处理请求的次数都不会成为瓶颈。.</p>
+
+            <p>你需要关注内存使用率。对于key-value这样简单的数据储存，memcache的内存使用率更高。如果采用hash结构，redis的内存使用率会更高。当然，这些都依赖于具体的应用场景。</p>
+
+            <p> 你需要关注关注数据持久化和主从复制时，只有redis拥有这两个特性。如果你的目标是构建一个缓存在升级或者重启后之前的数据不会丢失的话，那也只能选择redis。</p>
+
+            <p>
+                你应该关心你需要的操作。redis支持很多复杂的操作，甚至只考虑内存的使用情况，在一个单一操作里你常常可以做很多，而不需要将数据读取到客户端中（这样会需要很多的IO操作）。
+                这些复杂的操作基本上和纯GET和POST操作一样快，所以你不只是需要GET/SET而是更多的操作时，redis会起很大的作用。</p>
+        </blockquote>
+
+        <p>
+            我个人会很喜欢Redis，因为速度也没有差很多，如果真的遇到Redis无法承受的压力，再在那些局部的数据反问上用Memcached就好了——不过很难想象会有这样的场景发生，因为瓶颈一定发生在别的地方;-)
+        </p>
         <!---->
         <!---->
         <!--Post content end -->
